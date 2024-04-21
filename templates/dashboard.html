@@ -1,199 +1,199 @@
-{% extends "headers.html" %}
-{% block content %}
-<!-- Main Content -->
-<main>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
+  <title>Weather and Itinerary Information</title>
+  <style>
+    /* Global Styles */
+    .header-class{
+            background-color: black;
+            color: white;
+        }
+        .navigation {
+            display: flex;
+        }
+        .item {
+            list-style: none;
+            padding: 10px 25px;
+            color: white;
+        }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      width: 80%;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.5;
+      color: #555;
+    }
+
+    /* Weather Info Styles */
+    .weather-info, .itinerary-info, .booking-info {
+      margin-bottom: 40px;
+    }
+
+    .weather-info h1 {
+      color: #007bff;
+    }
+
+    .location-info span {
+      font-weight: bold;
+    }
+
+    .weather-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .weather-table th, .weather-table td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    .weather-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* Itinerary Info Styles */
+    .itinerary-info h1 {
+      color: #28a745;
+    }
+
+    /* Booking Info Styles */
+    .booking-info h1 {
+      color: #dc3545;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <header class="header-class">
+    <nav class="navbar">
+        <ul class="navigation">
+            <a class="item" href="index.html">Home</a>
+            <a class="item" href="bollywood.html" >Bollywood</a>
+            <a class="item" href="about.html">About Us</a>
+        </ul>
+        <div class="d-flex align-items-center">
+                   
+
+            <a href="login.html">
+              <button
+                style="text-decoration: none"
+                type="button"
+                class="btn-primary rounded btn px-3 me-2"
+              >
+                Login
+              </button>
+            </a>
+            <a href="register.html">
+              <button
+                style="width: max-content"
+                type="button"
+                class="nav-items btn btn-success rounded ms-3 px-3 mx-2"
+              >
+                <i class="fa-solid fa-user-plus"></i> Sign Up
+              </button>
+            </a>
+          </div>
+    </nav>
+</header>
   <div class="container">
-    <h1>Weather Information</h1>
-    <h5><b>Location:</b> {{weather_data['resolvedAddress']}}</h5>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Current Weather Conditions</th>
-          <th>Max Temperature (in °C)</th>
-          <th>Min Temperature (in °C)</th>
-          <th>Precipitation Probability</th>
-          <th>Humidity</th>
-          <th>Weather Alerts</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for weather_data_item in weather_data['days'] %}
-        <tr>
-          <td>{{ weather_data_item['datetime'] }}</td>
-          <td>{{ weather_data_item['conditions'] }}</td>
-          <td>{{ weather_data_item['tempmax'] }}</td>
-          <td>{{ weather_data_item['tempmin'] }}</td>
-          <td>{{ weather_data_item['precipprob'] }}</td>
-          <td>{{ weather_data_item['humidity'] }}</td>
-          <td>{{ weather_data_item['description'] }}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <!-- Weather Information -->
+    <section class="weather-info">
+      <h1 style="text-align: center;">Weather Information</h1>
+      <div class="location-info">
+        <h3>Location: <span>{{weather_data['resolvedAddress']}}</span></h3>
+      </div>
+      <div class="table-wrapper">
+        <table class="weather-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Conditions</th>
+              <th>Max Temperature (°C)</th>
+              <th>Min Temperature (°C)</th>
+            </tr>
+            </thead>
+          <tbody>
+
+            <tr>
+              <td>{{ weather_data_item['datetime'] }}</td>
+              <td>{{ weather_data_item['conditions'] }}</td>
+              <td>{{ weather_data_item['tempmax'] }}</td>
+              <td>{{ weather_data_item['tempmin'] }}</td>
+            </tr>
+          </tbody>
+
+          <thead>
+          <tr>
+            <th>Precipitation Probability</th>
+            <th>Humidity</th>
+            <th>Alerts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ weather_data_item['precipprob'] }}</td>
+            <td>{{ weather_data_item['humidity'] }}</td>
+            <td>{{ weather_data_item['description'] }}</td>
+          </tr>
+        </tbody>
+
+        </table>
+      </div>
+    </section>
+
+    <!-- Itinerary Information -->
+    <section class="itinerary-info">
+      <h1>Planned Itinerary</h1>
+      <p><strong>This is a tentative itinerary, so please be flexible, it may have some mistakes.</strong></p>
+      <div id="markdown-content">{{ plan }}</div>
+    </section>
+
+    <!-- Booking Information -->
+    <section class="booking-info">
+      <h1>Hotels & Flight Booking</h1>
+      <a href="https://www.booking.com" target="_blank" class="btn">Book Now</a>
+    </section>
   </div>
-  <div class="container">
-    <!-- Paragraph of plan with markdown syntax -->
-    <h1>Planned Itinerary</h1>
-    <code><h6>
-            **This is a tentative itinerary, so please be flexible, it may have
-            some mistakes.
-          </h6></code>
-
-    <div id="markdown-content">{{ plan }}</div>
-  </div>
-
-  <!-- Hotels at Destination -->
-  <div class="md-4 pd container">
-    <h5>
-      For Hotels & Flight Booking:
-      <a style="text-decoration: none" href="https://www.booking.com" target="_blank">
-        <button type="button" class="btn btn-light">
-          Click Here
-        </button>
-      </a>
-    </h5>
-  </div>
-</main>
-
-
-<!-- Share Icon -->
-<div class="floating-container">
-  <div class="floating-button">
-    <i class="fa-solid fa-share-from-square"></i>
-  </div>
-  <!-- Elements -->
-  <div class="element-container">
-    <!-- Facebook -->
-    <a class="float-element" href="https://www.facebook.com/sharer/sharer.php?u=https%3A//sanjeev02.pythonanywhere.com/"
-      target="_blank">
-      <span>
-        <i class="fa-brands fa-facebook"></i>
-    </a>
-
-    <!-- WhatsApp -->
-    </span>
-    <a class="float-element"
-      href="https://api.whatsapp.com/send?text=Check%20out%20this%20page:%20https://sanjeev02.pythonanywhere.com"
-      target="_blank">
-      <span>
-        <i class="fa-brands fa-whatsapp"></i>
-      </span>
-    </a>
-
-    <!-- Twitter or X -->
-    <a class="float-element"
-      href="https://twitter.com/intent/tweet?text=Check%20out%20this%20page:%20https://sanjeev02.pythonanywhere.com"
-      target="_blank">
-      <span>
-        <i class="fa-brands fa-x-twitter"></i>
-      </span>
-    </a>
-
-    <!-- LinkedIn -->
-    <a class="float-element"
-      href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A//sanjeev02.pythonanywhere.com" target="_blank">
-      <span>
-        <i class="fa-brands fa-linkedin"></i>
-      </span>
-    </a>
-
-    <!-- Telegram -->
-    <a class="float-element"
-      href="https://t.me/share?url=https%3A%2F%2Fsanjeev02.pythonanywhere.com%2F&text=Check%20this%20out"
-      target="_blank">
-      <span>
-        <i class="fa-brands fa-telegram"></i>
-      </span>
-    </a>
-    <!-- Download -->
-    <button id="download" class="float-element">
-      <span>
-        <i class="fa-solid fa-download"></i>
-      </span>
-    </button>
-  </div>
-</div>
-
-
-<!-- Footer -->
-<footer class="jumbotron text-center text-white fixed-bottom" style="background-color: #030303;">
-  <!-- Copyright -->
-  <div class="text-center p-3" style="background-color: rgba(255, 255, 255, 0)">
-    <p>&copy {{now.year}} Copyright</p>
-    <p>
-      Made With 🩷 By
-      <a style="color: #0ed9ddd6; text-decoration: none" href="#">Sanjeev</a>
-    </p>
-  </div>
-</footer>
-
-<!-- Download libraries -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
-  integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
-  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- 
-    This script sets a timeout function to remove all elements with the class "alert" after a certain duration. 
-    It first sets the opacity of the elements to 0 to initiate the transition, and then removes the elements after the transition duration. 
-    The delay for the transition duration can be adjusted by changing the value of the second setTimeout function. 
-    -->
-<script>
-  setTimeout(function () {
-    const alerts = document.querySelectorAll(".alert");
-
-    alerts.forEach(function (alert) {
-      // Set opacity to 0 to initiate the transition
-      alert.style.opacity = 0;
-    });
-
-    // After the transition duration, remove the alert elements
-    setTimeout(function () {
-      alerts.forEach(function (alert) {
-        alert.style.display = "none";
-      });
-    }, 1000); // Adjust this delay to match your transition duration (in this case, 1 second)
-  }, 5000);
-</script>
-
-<!-- This script tag includes the markdown-it library from the specified CDN. -->
-<script src="https://cdn.jsdelivr.net/npm/markdown-it@11.0.1/dist/markdown-it.min.js"></script>
-
-<!-- This script creates a Markdown parser, converts the Markdown text to HTML, and inserts the converted HTML into the document. The Markdown text is obtained from an element with the ID "markdown-content". -->
-<script>
-  // Create a Markdown parser
-  const md = window.markdownit();
-
-  // Convert the Markdown text to HTML
-  const html = md.render(
-    document.getElementById("markdown-content").textContent
-  );
-
-  // Insert the converted HTML into the document
-  document.getElementById("markdown-content").innerHTML = html;
-  // pdf of itinerary
-  document.getElementById('download').addEventListener('click', function() {
-    var element = document.querySelector('main');
-    var opt = {
-      margin: 0.5,
-      filename: 'itinerary.pdf',
-      image: { type: 'png', quality: 100 },
-      html2canvas: { scale: 0.8 },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' },
-    };
-
-      html2pdf().set(opt).from(element).toPdf().get('pdf').then(function(pdf) {
-      var totalPages = pdf.internal.getNumberOfPages();
-      for (var i = 1; i <= totalPages; i++) {
-        // Set position and alignment of footer text
-        pdf.setPage(i);
-        pdf.text('Visit us at:"https://sanjeev02.pythonanywhere.com"', 0.2, pdf.internal.pageSize.height - 0.3);
-      }
-      pdf.save('itinerary.pdf');
-    });
-  });
-
-</script>
-{% endblock %}
 </body>
-
 </html>
